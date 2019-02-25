@@ -1,2 +1,0 @@
-providerFilter=cn.anjiu.fan.common.dubbo.filter.ProviderFilter
-consumerFilter=cn.anjiu.fan.common.dubbo.filter.ConsumerFilter

@@ -9,10 +9,10 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-    <context:property-placeholder file-encoding="utf-8" location="classpath:cfg_${cfg.env}.properties" />
+    <context:property-placeholder file-encoding="utf-8" location="classpath:cfg_local.properties" />
 
     <!-- 自动扫描注解方式的bean -->
-    <context:component-scan base-package="cn.anjiu"/>
+    <context:component-scan base-package="com.nuzoul.mall"/>
     <bean id="jedisConnFactory"
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="usePool" value="false"></property>

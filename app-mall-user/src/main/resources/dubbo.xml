@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="app-mall-user"/>
+    <dubbo:monitor protocol="registry"/>
+    <!--<dubbo:provider filter="providerFilter"/>-->
+    <!--<dubbo:consumer filter="consumerFilter"/>-->
+    <dubbo:registry address="${zookeeper}" client="zkclient" timeout="5000"/>
+    <dubbo:protocol name="dubbo" port="${app.port}"/>
+
+    <!--注册服务-->
+    <dubbo:service interface="com.nuzoul.mall.user.service.TestUserService" ref="testUserService" timeout="10000"/>
+    <bean id="testUserService" class="com.nuzoul.mall.user.service.impl.TestUserServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.mall.user.service.MallUserService" ref="mallUserService" timeout="10000"/>
+    <bean id="mallUserService" class="com.nuzoul.mall.user.service.impl.MallUserServiceImpl"/>
+
+    <!--引入其它spring 配置-->
+    <import resource="classpath*:/spring-*.xml"/>
+</beans>

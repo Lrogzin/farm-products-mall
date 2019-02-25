@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.cnblogs.com/fangjian0423/p/xml-namespace.html -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<context:property-placeholder location="classpath:cfg_local.properties"/>
+
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
+
+
+	<!-- Forwards requests to the "/" resource to the "welcome" view -->
+	<mvc:view-controller path="/" view-name="index"/>
+
+
+	<!-- Enables @Autowired -->
+	<context:annotation-config/>
+	<context:component-scan base-package="com.nuzoul.mall">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<task:annotation-driven/>
+	<!-- 开启自动切面代理 -->
+	<!--<aop:aspectj-autoproxy/>-->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!--<bean id="logAspect" class="cn.anjiu.fan.admin.controller.LogAspect" />-->
+	<!-- 记录操作日志 -->
+	<!--<bean id="operationLogAop" class="com.ming.learn.core.aop.LogAopHandler"/>-->
+	<!--<aop:config>-->
+	<!--<aop:aspect id="logAOP" ref="operationLogAop">-->
+	<!--<aop:pointcut id="target" expression="execution(* com.ming.learn..*Controller.*(..))"/>-->
+	<!--<aop:around method="doSaveLog" pointcut-ref="target"/>-->
+	<!--</aop:aspect>-->
+	<!--</aop:config>-->
+
+	<!--&lt;!&ndash; Define the OXM marshaller which is used to convert the Objects XML. &ndash;&gt;-->
+	<bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<!--<property name="aliasesByType">-->
+			<!--<map>-->
+				<!--<entry key="saleInfo" value="cn.anjiu.fan.admin.common.SaleInfo"></entry>-->
+			<!--</map>-->
+		<!--</property>-->
+	</bean>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="features">
+					<array>
+						<!-- 下面配置，默认是false-->
+						<value>WriteMapNullValue</value>
+						<!--<value>WriteNullNumberAsZero</value>-->
+						<value>WriteNullListAsEmpty</value>
+						<value>WriteNullStringAsEmpty</value>
+						<value>WriteNullBooleanAsFalse</value>
+						<value>WriteDateUseDateFormat</value>
+					</array>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<description>use jackson to do json</description>
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<!--<property name="objectMapper">-->
+					<!--<bean class="cn.anjiu.fan.admin.common.JsonFilter"></bean>-->
+				<!--</property>-->
+			</bean>
+			<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+				<description>use xstream to do xml</description>
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/xml</value>
+					</list>
+				</property>
+				<property name="marshaller" ref="oxmMarshaller"/>
+				<property name="unmarshaller" ref="oxmMarshaller"/>
+			</bean>
+			<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
+				<description>use Jaxb to do xml</description>
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/xhtml+xml</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+			<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 如果配置了<mvc:annotation-driven />则会被默认的覆盖掉,
+    参考 http://blog.csdn.net/java0311/article/details/19003175
+    see org.springframework.api.servlet.config.MvcNamespaceHandler
+     -->
+	<!--
+        <bean class="org.springframework.api.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+            <property name="messageConverters">
+                <list>
+                    <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+                    <bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+                    <bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+                    <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+                    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                        <property name="objectMapper">
+                            <bean class="com.cqfc.action.utils.JsonFilter"></bean>
+                        </property>
+                    </bean>
+                </list>
+            </property>
+        </bean>
+        <bean class="org.springframework.api.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+     -->
+
+	<bean id="fastJsonView" class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
+
+	<bean class="com.nuzoul.mall.mvc.LotteryHandlerExceptionResolver">
+		<property name="fastJsonView" ref="fastJsonView"></property>
+	</bean>
+
+	<!-- Configure the multipart resolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="20480000"/>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!--权限拦截器-->
+	<!--<mvc:interceptors>-->
+
+	<!--</mvc:interceptors>-->
+
+</beans>
