@@ -7,4 +7,5 @@ import com.nuzoul.mall.common.service.BaseResp;
  * @Date: 2019/2/25 16:06
  */
 public class MallUserLoginResp extends BaseResp {
+
 }

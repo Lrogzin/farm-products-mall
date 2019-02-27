@@ -70,7 +70,8 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi', version: '3.15'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.15'
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.6.2'
-    
+    compile group: 'org.json', name: 'json', version: '20180813'
+
 //    compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
 //    compile group: 'org.apache.shiro', name: 'shiro-web', version: '1.4.0'
 //    compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
