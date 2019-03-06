@@ -6,8 +6,8 @@
     <!--<dubbo:consumer filter="consumerFilter"/>-->
     <dubbo:registry address="${zookeeper}" client="zkclient"/>
     <dubbo:monitor protocol="registry"/>
-    <dubbo:reference id="testUserService" interface="com.nuzoul.mall.user.service.TestUserService"/>
-    <dubbo:reference id="mallUserService" interface="com.nuzoul.mall.user.service.MallUserService"/>
+    <!--<dubbo:reference id="testUserService" interface="com.nuzoul.user.service.TestUserService"/>-->
+    <!--<dubbo:reference id="mallUserService" interface="com.nuzoul.user.service.MallUserService"/>-->
 
 
 </beans>

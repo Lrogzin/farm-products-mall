@@ -1,10 +1,10 @@
 rootProject.name = 'farm-products-mall'
 include 'app-mall-user'
 include 'app-mall-product'
-include 'app-mall-order'
 include 'mall-common'
 include 'mall-service'
 include 'web-mall-api'
 include 'app-mall-admin'
 include 'web-mall-admin'
+include 'app-mall-es'
 

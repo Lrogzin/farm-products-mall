@@ -126,7 +126,7 @@
 
 	<bean id="fastJsonView" class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
 
-	<bean class="com.nuzoul.mall.mvc.LotteryHandlerExceptionResolver">
+	<bean class="com.nuzoul.common.mvc.LotteryHandlerExceptionResolver">
 		<property name="fastJsonView" ref="fastJsonView"></property>
 	</bean>
 

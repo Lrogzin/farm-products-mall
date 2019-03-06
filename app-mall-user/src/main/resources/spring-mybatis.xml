@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!--<context:property-placeholder file-encoding="utf-8" location="classpath:cfg_${cfg.env}.properties" />-->
-    <context:component-scan base-package="com.nuzoul.mall"/>
+    <context:component-scan base-package="com.nuzoul.user"/>
     <!--测试-->
     <context:property-placeholder file-encoding="utf-8" location="classpath:cfg_local.properties" />
     <!-- 当前库配置数据源 -->
@@ -27,27 +27,15 @@
         <!--<property name="plugins">-->
         <!--<ref bean="paginationInterceptor"/>-->
         <!--</property>-->
-        <property name="plugins">
-            <array>
-                <bean class= "com.github.pagehelper.PageInterceptor">
-                    <property name="properties">
-                        <value>
-                            helperDialect=mysql
-                            rowBoundsWithCount=true
-                        </value>
-                    </property>
 
-                </bean>
-            </array>
-        </property>
         <property name="mapperLocations" value="classpath:mybatis-mapper/*Mapper.xml"/>
     </bean>
 
     <!-- 自动扫描mybatis mapper -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <property name="basePackage" value="com.nuzoul.mall"/>       <!-- TODO need to change!! -->
-        <property name="markerInterface" value="com.nuzoul.mall.mybatis.BaseMapper" />
+        <property name="basePackage" value="com.nuzoul.mapper"/>       <!-- TODO need to change!! -->
+        <property name="markerInterface" value="com.nuzoul.common.mybatis.BaseMapper" />
     </bean>
     <!--<bean id="paginationInterceptor" class="QueryPageInterceptor"></bean>-->
 

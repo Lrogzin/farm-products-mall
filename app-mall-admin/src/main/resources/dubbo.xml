@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="app-mall-admin"/>
+    <dubbo:monitor protocol="registry"/>
+    <!--<dubbo:provider filter="providerFilter"/>-->
+    <!--<dubbo:consumer filter="consumerFilter"/>-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" client="zkclient" timeout="5000"/>
+    <dubbo:protocol name="dubbo" port="11034"/>
+
+    <!--注册服务-->
+    <dubbo:service interface="com.nuzoul.admin.service.ItemService" ref="itemService" timeout="10000"/>
+    <bean id="itemService" class="com.nuzoul.admin.service.impl.ItemServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.MemberService" ref="memberService" timeout="10000"/>
+    <bean id="memberService" class="com.nuzoul.admin.service.impl.MemberServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.ItemCatService" ref="itemCatService" timeout="10000"/>
+    <bean id="itemCatService" class="com.nuzoul.admin.service.impl.ItemCatServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.UserService" ref="userService" timeout="10000"/>
+    <bean id="userService" class="com.nuzoul.admin.service.impl.UserServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.OrderService" ref="orderService" timeout="10000"/>
+    <bean id="orderService" class="com.nuzoul.admin.service.impl.OrderServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.ThanksService" ref="thanksService" timeout="10000"/>
+    <bean id="thanksService" class="com.nuzoul.admin.service.impl.ThanksServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.SystemService" ref="systemService" timeout="10000"/>
+    <bean id="systemService" class="com.nuzoul.admin.service.impl.SystemServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.DictService" ref="dictService" timeout="10000"/>
+    <bean id="dictService" class="com.nuzoul.admin.service.impl.DictServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.ExpressService" ref="expressService" timeout="10000"/>
+    <bean id="expressService" class="com.nuzoul.admin.service.impl.ExpressServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.admin.service.CountService" ref="countService" timeout="10000"/>
+    <bean id="countService" class="com.nuzoul.admin.service.impl.CountServiceImpl"/><!--引入其它spring 配置-->
+    <import resource="classpath*:/spring-*.xml"/>
+</beans>

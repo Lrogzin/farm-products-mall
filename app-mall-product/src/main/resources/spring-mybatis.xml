@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--<context:property-placeholder file-encoding="utf-8" location="classpath:cfg_${cfg.env}.properties" />-->
+    <context:component-scan base-package="com.nuzoul.product"/>
+    <!--测试-->
+    <context:property-placeholder file-encoding="utf-8" location="classpath:cfg_local.properties" />
+    <!-- 当前库配置数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="testOnBorrow" value="true" />
+        <property name="validationQuery" value="select 0" />
+    </bean>
+    <!--<bean id="ygjOrderService" class="YgjOrderService"/>&lt;!&ndash;用于单元测试&ndash;&gt;-->
+    <!-- 当前库Mybatis的SqlSessionFactory配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-conf/mybatis-config-local.xml"></property>
+        <!--<property name="plugins">-->
+        <!--<ref bean="paginationInterceptor"/>-->
+        <!--</property>-->
+        <property name="mapperLocations" value="classpath:mybatis-mapper/*Mapper.xml"/>
+    </bean>
+
+    <!-- 自动扫描mybatis mapper -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="com.nuzoul.mapper"/>       <!-- TODO need to change!! -->
+        <property name="markerInterface" value="com.nuzoul.common.mybatis.BaseMapper" />
+    </bean>
+    <!--<bean id="paginationInterceptor" class="QueryPageInterceptor"></bean>-->
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
+</beans>

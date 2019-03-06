@@ -7,15 +7,22 @@
     <dubbo:monitor protocol="registry"/>
     <!--<dubbo:provider filter="providerFilter"/>-->
     <!--<dubbo:consumer filter="consumerFilter"/>-->
-    <dubbo:registry address="${zookeeper}" client="zkclient" timeout="5000"/>
-    <dubbo:protocol name="dubbo" port="${app.port}"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" client="zkclient" timeout="5000"/>
+    <dubbo:protocol name="dubbo" port="11031"/>
 
     <!--注册服务-->
-    <dubbo:service interface="com.nuzoul.mall.user.service.TestUserService" ref="testUserService" timeout="10000"/>
-    <bean id="testUserService" class="com.nuzoul.mall.user.service.impl.TestUserServiceImpl"/>
-    <dubbo:service interface="com.nuzoul.mall.user.service.MallUserService" ref="mallUserService" timeout="10000"/>
-    <bean id="mallUserService" class="com.nuzoul.mall.user.service.impl.MallUserServiceImpl"/>
-
+    <dubbo:service interface="com.nuzoul.user.service.LoginService" ref="loginService" timeout="10000"/>
+    <bean id="loginService" class="com.nuzoul.user.service.impl.LoginServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.user.service.RegisterService" ref="registerService" timeout="10000"/>
+    <bean id="registerService" class="com.nuzoul.user.service.impl.RegisterServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.user.service.CartService" ref="cartService" timeout="10000"/>
+    <bean id="cartService" class="com.nuzoul.user.service.impl.CartServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.user.service.OrderService" ref="orderService" timeout="10000"/>
+    <bean id="orderService" class="com.nuzoul.user.service.impl.OrderServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.user.service.AddressService" ref="addressService" timeout="10000"/>
+    <bean id="addressService" class="com.nuzoul.user.service.impl.AddressServiceImpl"/>
+    <dubbo:service interface="com.nuzoul.user.service.MemberService" ref="memberService" timeout="10000"/>
+    <bean id="memberService" class="com.nuzoul.user.service.impl.MemberServiceImpl"/>
     <!--引入其它spring 配置-->
     <import resource="classpath*:/spring-*.xml"/>
 </beans>
