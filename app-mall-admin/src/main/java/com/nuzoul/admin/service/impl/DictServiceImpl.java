@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 @Service
 public class DictServiceImpl implements DictService {

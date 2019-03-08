@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class OrderDetail implements Serializable {
 

@@ -3,7 +3,7 @@ package com.nuzoul.common.constant;
 
 /**
  * 常量
- * @author Exrickx
+ * @author Nuzoul
  */
 public interface CommonConstant {
 

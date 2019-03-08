@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  * 前后端交互数据标准
- * @author Exrickx
+ * @author Nuzoul
  * @Date 2018/03/24
  */
 public class Result<T> implements Serializable{

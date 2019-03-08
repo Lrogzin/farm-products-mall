@@ -1,7 +1,7 @@
 package com.nuzoul.common.constant;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public interface CountConstant {
 

@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  *
- * @author Exrick
- * @date 2017/8/25
+ * @author Nuzoul
+ * @Date: 2019/3/25
  */
 public class MemberDto implements Serializable{
 

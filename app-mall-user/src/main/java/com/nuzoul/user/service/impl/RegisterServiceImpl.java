@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 @Service
 public class RegisterServiceImpl implements RegisterService {

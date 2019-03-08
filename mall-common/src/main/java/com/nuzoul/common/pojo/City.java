@@ -3,7 +3,7 @@ package com.nuzoul.common.pojo;
 import java.io.Serializable;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class City implements Serializable {
 

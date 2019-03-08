@@ -1,5 +1,6 @@
 package com.nuzoul.product.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
@@ -29,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -41,9 +42,11 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private TbPanelContentMapper tbPanelContentMapper;
     @Autowired
-    private TbItemMapper tbItemMapper;
-    @Autowired
     private TbItemDescMapper tbItemDescMapper;
+    @Autowired
+    private TbItemMapper tbItemMapper;
+
+    @Autowired
     JedisClient jedisClient;
 
     @Value("${PRODUCT_HOME}")
@@ -198,6 +201,7 @@ public class ContentServiceImpl implements ContentService {
             TbPanelContentExample.Criteria criteriaContent=exampleContent.createCriteria();
             //条件查询
             criteriaContent.andPanelIdEqualTo(tbPanel.getId());
+            log.error("examp======{}", JSON.toJSONString(exampleContent));
             List<TbPanelContent> contentList=tbPanelContentMapper.selectByExample(exampleContent);
             for(TbPanelContent content:contentList){
                 if(content.getProductId()!=null){
@@ -384,6 +388,7 @@ public class ContentServiceImpl implements ContentService {
             orderCol="created";
             orderDir="desc";
         }
+        log.info("==============here==========");
 
         List<TbItem> tbItemList = tbItemMapper.selectItemFront(cid,orderCol,orderDir,priceGt,priceLte);
         PageInfo<TbItem> pageInfo=new PageInfo<>(tbItemList);
@@ -480,7 +485,12 @@ public class ContentServiceImpl implements ContentService {
         //查询缓存
         try{
             //有缓存则读取
-            String json=jedisClient.get(HEADER_PANEL);
+            String json=null;
+            try{
+                json = jedisClient.get(HEADER_PANEL);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if(json!=null){
                 list = new Gson().fromJson(json, new TypeToken<List<TbPanelContent>>(){}.getType());
                 log.info("读取了导航栏缓存");

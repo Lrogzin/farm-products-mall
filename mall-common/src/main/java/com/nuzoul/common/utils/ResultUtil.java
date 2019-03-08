@@ -4,7 +4,7 @@ package com.nuzoul.common.utils;
 import com.nuzoul.common.pojo.Result;
 
 /**
- * @author Exrick
+ * @author Nuzoul
  * @date 2018/03/24
  */
 public class ResultUtil<T> {

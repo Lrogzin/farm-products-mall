@@ -18,7 +18,7 @@ import org.springframework.util.DigestUtils;
 import java.util.*;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 @Service
 public class UserServiceImpl implements UserService {

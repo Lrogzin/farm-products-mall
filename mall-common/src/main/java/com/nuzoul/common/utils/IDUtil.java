@@ -3,7 +3,7 @@ package com.nuzoul.common.utils;
 import java.util.Random;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class IDUtil {
 

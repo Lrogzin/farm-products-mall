@@ -3,7 +3,7 @@ package com.nuzoul.dto;
 import java.io.Serializable;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class EsCount implements Serializable {
 

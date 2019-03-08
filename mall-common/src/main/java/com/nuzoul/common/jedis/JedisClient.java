@@ -3,7 +3,7 @@ package com.nuzoul.common.jedis;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public interface JedisClient {
 

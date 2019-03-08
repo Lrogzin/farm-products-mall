@@ -27,7 +27,8 @@
         <!--<property name="plugins">-->
         <!--<ref bean="paginationInterceptor"/>-->
         <!--</property>-->
-        <property name="mapperLocations" value="classpath:mybatis-mapper/*Mapper.xml"/>
+
+        <property name="mapperLocations" value="classpath:mybatis-mapper/*.xml"/>
     </bean>
 
     <!-- 自动扫描mybatis mapper -->

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class ProductDet implements Serializable {
 

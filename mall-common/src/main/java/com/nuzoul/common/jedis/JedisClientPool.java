@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPool;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class JedisClientPool implements JedisClient {
 	
@@ -30,9 +30,15 @@ public class JedisClientPool implements JedisClient {
 
 	@Override
 	public String get(String key) {
+		String result = null;
 		Jedis jedis = jedisPool.getResource();
-		String result = jedis.get(key);
-		jedis.close();
+		try{
+			result = jedis.get(key);
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			jedis.close();
+		}
 		return result;
 	}
 

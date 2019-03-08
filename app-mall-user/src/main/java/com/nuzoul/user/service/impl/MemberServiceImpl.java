@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 @Service
 public class MemberServiceImpl implements MemberService {

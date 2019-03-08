@@ -7,12 +7,13 @@
     <dubbo:monitor protocol="registry"/>
     <!--<dubbo:provider filter="providerFilter"/>-->
     <!--<dubbo:consumer filter="consumerFilter"/>-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" client="zkclient" timeout="5000"/>
-    <dubbo:protocol name="dubbo" port="11032"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" client="zkclient" timeout="60000"/>
+    <dubbo:protocol name="dubbo" port="11035"/>
 
     <!--注册服务-->
     <dubbo:service interface="com.nuzoul.product.service.PanelService" ref="panelService" timeout="10000"/>
     <bean id="panelService" class="com.nuzoul.product.service.impl.PanelServiceImpl"/>
+
     <dubbo:service interface="com.nuzoul.product.service.ContentService" ref="contentService" timeout="10000"/>
     <bean id="contentService" class="com.nuzoul.product.service.impl.ContentServiceImpl"/>
     <!--引入其它spring 配置-->

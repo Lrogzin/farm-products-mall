@@ -1,7 +1,7 @@
 package com.nuzoul.common.exception;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class FPMallUploadException extends RuntimeException {
 

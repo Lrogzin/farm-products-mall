@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisCluster;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class JedisClientCluster implements JedisClient {
 	
@@ -28,7 +28,13 @@ public class JedisClientCluster implements JedisClient {
 
 	@Override
 	public String get(String key) {
-		return jedisCluster.get(key);
+		String result = null ;
+		try{
+			result = jedisCluster.get(key);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

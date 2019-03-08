@@ -1,8 +1,8 @@
 package com.nuzoul.common.exception;
 
 /**
- * @author Exrick
- * @date 2017/8/24
+ * @author Nuzoul
+ * @Date: 2019/3/24
  */
 public class FPMallException extends RuntimeException {
 

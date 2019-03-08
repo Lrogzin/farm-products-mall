@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 @Service
 public class ThanksServiceImpl implements ThanksService {

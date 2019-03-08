@@ -4,7 +4,7 @@ package com.nuzoul.dto.front;
 import java.io.Serializable;
 
 /**
- * @author Exrickx
+ * @author Nuzoul
  */
 public class Member implements Serializable{
 
